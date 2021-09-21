@@ -1799,7 +1799,7 @@ class _BaseLazyModule(ModuleType):
 
     # Very heavily inspired by optuna.integration._IntegrationModule
     # https://github.com/optuna/optuna/blob/master/optuna/integration/__init__.py
-    def __init__(self, name, import_structure):
+    def __init__(self, name, import_structure, module_spec=None,):
         super().__init__(name)
         self._modules = set(import_structure.keys())
         self._class_to_module = {}
@@ -1808,6 +1808,7 @@ class _BaseLazyModule(ModuleType):
                 self._class_to_module[value] = key
         # Needed for autocompletion in an IDE
         self.__all__ = list(import_structure.keys()) + sum(import_structure.values(), [])
+        self.__spec__ = module_spec
 
     # Needed for autocompletion in an IDE
     def __dir__(self):
