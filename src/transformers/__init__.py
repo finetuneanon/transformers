@@ -2645,7 +2645,7 @@ else:
                 return __version__
             return super().__getattr__(name)
 
-    sys.modules[__name__] = _LazyModule(__name__, module_spec=__spec__, _import_structure)
+    sys.modules[__name__] = _LazyModule(__name__, _import_structure, module_spec=__spec__,)
 
 
 if not is_tf_available() and not is_torch_available() and not is_flax_available():
